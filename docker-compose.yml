@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: root
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - fridgerator
+
+  fridgerator:
+    image: fridgerator
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - fridgerator
+
+networks:
+  fridgerator:
+    driver: bridge
+
+volumes:
+  postgres:
