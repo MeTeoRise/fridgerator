@@ -2,10 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from app.config import get_db_url
+from app.core.settings import Settings
 
+settings = Settings()
 
-SQLALCHEMY_DATABASE_URL = get_db_url()
+SQLALCHEMY_DATABASE_URL = settings.DB_CONNECTION_URL
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL

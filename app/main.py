@@ -1,9 +1,11 @@
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
-from app.adapters.database.mysql import engine, SessionLocal, Base
-from app.core.models.user import User, Item, UserCreate, ItemCreate
-from app.adapters.database.crud.user_repo import get_user_by_email, get_user, get_users, create_user, create_user_item, get_items
+from app.adapters.db.session import engine, SessionLocal, Base
+from app.core.schemas.user import User, UserCreate
+from app.core.schemas.item import Item, ItemCreate
+from app.adapters.db.crud.crud_user import get_user_by_email, get_user, get_users, create_user
+from app.adapters.db.crud.crud_item import create_user_item, get_items
 
 Base.metadata.create_all(bind=engine)
 
