@@ -5,5 +5,5 @@ This project is a Fridge Terminator. It will be a inventory manager of edible pr
 ## Build and run the project
 ```
 make build
-make run
+make start
 ```
