@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from app.core.schemas.item import Item
+from app.fridge.schemas import Item
 
 
 class UserBase(BaseModel):
