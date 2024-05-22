@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Item List</h2>
+  <ul>
+    {% for item in items %}
+      <li>
+        <strong>{{ item.name }}</strong> - Category: {{ item.category }}<br>
+        Quantity: {{ item.quantity }}, Expiration: {{ item.expiration_date }}<br>
+        Located: {{ item.location }}
+        {% if item.image %}
+          <img src="{{ item.image.url }}" alt="{{ item.name }}" style="height:100px;">
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>No items found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
