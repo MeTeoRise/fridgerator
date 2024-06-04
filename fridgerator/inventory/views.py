@@ -11,12 +11,14 @@ from io import BytesIO
 from django.utils import timezone
 from dotenv import load_dotenv
 import os
+from openai import OpenAI
 
 
 load_dotenv()
 
 UPCDATABASE_API_TOKEN = os.getenv('UPCDATABASE_API_TOKEN')
 UPCDATABASE_BASE_URL = "https://api.upcdatabase.org/product/"
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 
 class ItemListView(ListView):
@@ -189,3 +191,27 @@ def get_product_details(barcode_data):
     if response.status_code == 200:
         return response.json()
     return None
+
+
+def recipes_view(request):
+    fridge_items = Item.objects.all()
+    ingredients = ', '.join([item.name for item in fridge_items])
+
+    prompt_text = f"Given these ingredients: {ingredients}, suggest a few recipes."
+    client = OpenAI(api_key=OPENAI_API_KEY)
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": prompt_text}
+            ],
+            max_tokens=500
+        )
+        recipe_suggestions = response.choices[0].message.content if response.choices and response.choices[0].message else "No recipes found."
+    except Exception as e:
+        recipe_suggestions = f"Failed to fetch recipes: {str(e)}"
+
+    return render(request, 'recipes/recipes.html', {
+        'ingredients': ingredients,
+        'recipe_suggestions': recipe_suggestions
+    })

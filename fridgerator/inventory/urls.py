@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import ItemListView, AddItemView, ShoppingListView, AddShoppingListView, AlertListView, AddAlertView, \
     MaintenanceListView, AddMaintenanceView, SettingsListView, AddSettingsView, EditSettingsView, barcode_upload_view, \
-    ItemDeleteView, ShoppingListDeleteView, AlertDeleteView, MaintenanceDeleteView
+    ItemDeleteView, ShoppingListDeleteView, AlertDeleteView, MaintenanceDeleteView, recipes_view
 
 
 urlpatterns = [
@@ -21,4 +21,5 @@ urlpatterns = [
     path('settings/edit/<int:pk>/', EditSettingsView.as_view(), name='edit-settings'),
     path('items/upload-barcode/', barcode_upload_view, name='upload-barcode'),
     path('shopping-list/delete/<int:pk>/', ShoppingListDeleteView.as_view(), name='delete-shopping-item'),
+    path('recipes/', recipes_view, name='recipes'),
 ]
