@@ -6,7 +6,7 @@ class Item(models.Model):
     category = models.CharField(max_length=100)
     quantity = models.IntegerField(default=1)
     purchase_date = models.DateField()
-    expiration_date = models.DateField()
+    expiration_date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=100, blank=True)
     image = models.ImageField(upload_to='items_images/', blank=True, null=True)
 
@@ -45,10 +45,11 @@ class Maintenance(models.Model):
 
 
 class Setting(models.Model):
+    setting_id = models.AutoField(primary_key=True, default=1)
     temperature_setting = models.DecimalField(max_digits=4, decimal_places=2)
     notification_enabled = models.BooleanField(default=True)
     notification_frequency = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
-        return f"Settings {self.id} - Temperature: {self.temperature_setting}"
+        return f"Settings {self.setting_id} - Temperature: {self.temperature_setting}"
 

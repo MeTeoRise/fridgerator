@@ -2,15 +2,20 @@
 
 {% block content %}
   <h2>Item List</h2>
+  <div class="mb-3">
+    <a href="{% url 'add-item' %}" class="btn btn-primary">Add Item</a>
+    <a href="{% url 'upload-barcode' %}" class="btn btn-secondary">Upload Barcode</a>
+  </div>
   <ul>
     {% for item in items %}
       <li>
         <strong>{{ item.name }}</strong> - Category: {{ item.category }}<br>
-        Quantity: {{ item.quantity }}, Expiration: {{ item.expiration_date }}<br>
-        Located: {{ item.location }}
+        Quantity: {{ item.quantity }}{% if item.expiration_date %}, Expiration: {{ item.expiration_date }}{% endif %}<br>
+        {% if item.location %} Located: {{ item.location }} {% endif %}
         {% if item.image %}
           <img src="{{ item.image.url }}" alt="{{ item.name }}" style="height:100px;">
         {% endif %}
+        <a href="{% url 'delete-item' pk=item.pk %}" class="btn btn-danger">Delete</a>
       </li>
     {% empty %}
       <li>No items found.</li>
