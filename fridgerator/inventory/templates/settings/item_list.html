@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Settings</h2>
+  <ul>
+    {% for item in items %}
+      <li>
+        <strong>Temperature: {{ item.temperature_setting }} C</strong><br>
+      </li>
+      <li>
+        <strong>Notifications Enabled: {{ item.notification_enabled }}</strong><br>
+      </li>
+      <li>
+        <strong>Notification Frequency: {{ item.notification_frequency }}</strong><br>
+      </li>
+    {% empty %}
+      <li>No settings found.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'edit-settings' 1 %}" class="btn btn-primary">Edit Settings</a>
+{% endblock %}

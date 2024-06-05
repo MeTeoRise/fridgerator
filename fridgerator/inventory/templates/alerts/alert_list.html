@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Alert List</h2>
+  <a href="{% url 'add-alert-list' %}" class="btn btn-primary">Add Alert</a>
+  <ul>
+    {% for item in alerts %}
+      <li>
+        <strong>{{ item.item.name }}</strong> - Type: {{ item.alert_type }}<br>
+        Message: {{ item.message }}, Date Issued: {{ item.date_issued }}<br>
+        <a href="{% url 'delete-alert' pk=item.pk %}" class="btn btn-danger btn-sm">Delete</a>
+      </li>
+    {% empty %}
+      <li>No alerts found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

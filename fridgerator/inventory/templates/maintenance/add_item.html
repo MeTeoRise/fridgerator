@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Add New Maintenance Item</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <a href="{% url 'maintenance-list' %}" class="btn btn-secondary mt-2">Back to Maintenance List</a>
+{% endblock %}

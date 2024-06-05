@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Edit Setting</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+  <a href="{% url 'settings' %}" class="btn btn-secondary mt-2">Back to Settings List</a>
+{% endblock %}

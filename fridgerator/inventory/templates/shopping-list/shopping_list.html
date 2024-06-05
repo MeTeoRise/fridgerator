@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Shopping List</h2>
+  <a href="{% url 'add-shopping-list' %}" class="btn btn-primary">Add Shopping Item</a>
+  <ul>
+    {% for item in items %}
+      <li>
+        <strong>{{ item.item.name }}</strong> - Quantity: {{ item.quantity_needed }}<br>
+        <a href="{% url 'delete-shopping-item' pk=item.pk %}" class="btn btn-danger btn-sm">Delete</a>  <!-- Delete button for each shopping item -->
+      </li>
+    {% empty %}
+      <li>No items found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
